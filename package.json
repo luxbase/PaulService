@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "images": "node tools/optimize-images"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.0"
+  }
+}

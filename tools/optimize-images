@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const sharp = require('sharp');
+const root = path.resolve(__dirname, '..');
+const sourceDir = path.join(root, 'fotos_originales');
+const outputDir = path.join(root, 'assets', 'img');
+const widths = [640, 1600];
+const isImage = (name) => /\.(jpe?g|png|webp|avif)$/i.test(name);
+
+async function main() {
+  await fs.mkdir(outputDir, { recursive: true });
+  const names = (await fs.readdir(sourceDir).catch(() => [])).filter(isImage).sort((a, b) => a.localeCompare(b));
+  await Promise.all((await fs.readdir(outputDir)).filter((name) => /^((hero)|foto-).+-(640|1600)\.webp$/.test(name)).map((name) => fs.unlink(path.join(outputDir, name))));
+  if (!names.length) {
+    await fs.writeFile(path.join(outputDir, 'gallery.json'), JSON.stringify({ hero: null, photos: [] }, null, 2) + '\n');
+    console.log('No hay fotos en fotos_originales/. Se generó una galería vacía.'); return;
+  }
+  const photos = [];
+  for (const [index, name] of names.entries()) {
+    const file = path.join(sourceDir, name);
+    const metadata = await sharp(file).rotate().metadata();
+    const ratio = (metadata.width || 1) / (metadata.height || 1);
+    photos.push({ id:`foto-${String(index + 1).padStart(2, '0')}`, file, width:metadata.width, height:metadata.height, ratio, alt:'Mueble de madera a medida' });
+  }
+  const hero = [...photos].sort((a, b) => ((b.ratio >= 1 ? 100 : 0) + Math.min(b.width*b.height/100000, 30) - Math.abs(b.ratio-1.5)*10) - ((a.ratio >= 1 ? 100 : 0) + Math.min(a.width*a.height/100000, 30) - Math.abs(a.ratio-1.5)*10))[0];
+  async function makeVersions(photo, base) {
+    for (const width of widths) await sharp(photo.file).rotate().resize({ width, withoutEnlargement:true }).webp({ quality:82, effort:5 }).toFile(path.join(outputDir, `${base}-${width}.webp`));
+  }
+  await Promise.all(photos.map((photo) => makeVersions(photo, photo.id)));
+  await makeVersions(hero, 'hero');
+  const jsonPhoto = (photo, base = photo.id) => ({ name:base, width:photo.width, height:photo.height, alt:photo.alt, src:`assets/img/${base}-1600.webp`, srcset:`assets/img/${base}-640.webp 640w, assets/img/${base}-1600.webp 1600w` });
+  await fs.writeFile(path.join(outputDir, 'gallery.json'), JSON.stringify({ hero:jsonPhoto(hero, 'hero'), photos:photos.filter((photo) => photo !== hero).map((photo) => jsonPhoto(photo)) }, null, 2) + '\n');
+  console.log(`Listo: ${photos.length} fotos procesadas; hero elegido: ${path.basename(hero.file)}`);
+}
+main().catch((error) => { console.error(error); process.exitCode = 1; });

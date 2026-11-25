@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "name": "hero",
+    "width": 2048,
+    "height": 1536,
+    "alt": "Mueble de madera a medida",
+    "src": "assets/img/hero-1600.webp",
+    "srcset": "assets/img/hero-640.webp 640w, assets/img/hero-1600.webp 1600w"
+  },
+  "photos": [
+    {
+      "name": "foto-01",
+      "width": 1536,
+      "height": 2048,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-01-1600.webp",
+      "srcset": "assets/img/foto-01-640.webp 640w, assets/img/foto-01-1600.webp 1600w"
+    },
+    {
+      "name": "foto-02",
+      "width": 1536,
+      "height": 2048,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-02-1600.webp",
+      "srcset": "assets/img/foto-02-640.webp 640w, assets/img/foto-02-1600.webp 1600w"
+    },
+    {
+      "name": "foto-04",
+      "width": 1280,
+      "height": 960,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-04-1600.webp",
+      "srcset": "assets/img/foto-04-640.webp 640w, assets/img/foto-04-1600.webp 1600w"
+    },
+    {
+      "name": "foto-05",
+      "width": 2048,
+      "height": 1536,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-05-1600.webp",
+      "srcset": "assets/img/foto-05-640.webp 640w, assets/img/foto-05-1600.webp 1600w"
+    },
+    {
+      "name": "foto-06",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-06-1600.webp",
+      "srcset": "assets/img/foto-06-640.webp 640w, assets/img/foto-06-1600.webp 1600w"
+    },
+    {
+      "name": "foto-07",
+      "width": 2048,
+      "height": 1536,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-07-1600.webp",
+      "srcset": "assets/img/foto-07-640.webp 640w, assets/img/foto-07-1600.webp 1600w"
+    },
+    {
+      "name": "foto-08",
+      "width": 1536,
+      "height": 2048,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-08-1600.webp",
+      "srcset": "assets/img/foto-08-640.webp 640w, assets/img/foto-08-1600.webp 1600w"
+    },
+    {
+      "name": "foto-09",
+      "width": 1371,
+      "height": 3055,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-09-1600.webp",
+      "srcset": "assets/img/foto-09-640.webp 640w, assets/img/foto-09-1600.webp 1600w"
+    },
+    {
+      "name": "foto-10",
+      "width": 1371,
+      "height": 3055,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-10-1600.webp",
+      "srcset": "assets/img/foto-10-640.webp 640w, assets/img/foto-10-1600.webp 1600w"
+    },
+    {
+      "name": "foto-11",
+      "width": 1600,
+      "height": 1200,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-11-1600.webp",
+      "srcset": "assets/img/foto-11-640.webp 640w, assets/img/foto-11-1600.webp 1600w"
+    },
+    {
+      "name": "foto-12",
+      "width": 1600,
+      "height": 1200,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-12-1600.webp",
+      "srcset": "assets/img/foto-12-640.webp 640w, assets/img/foto-12-1600.webp 1600w"
+    },
+    {
+      "name": "foto-13",
+      "width": 736,
+      "height": 1640,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-13-1600.webp",
+      "srcset": "assets/img/foto-13-640.webp 640w, assets/img/foto-13-1600.webp 1600w"
+    },
+    {
+      "name": "foto-14",
+      "width": 736,
+      "height": 1640,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-14-1600.webp",
+      "srcset": "assets/img/foto-14-640.webp 640w, assets/img/foto-14-1600.webp 1600w"
+    },
+    {
+      "name": "foto-15",
+      "width": 736,
+      "height": 1640,
+      "alt": "Mueble de madera a medida",
+      "src": "assets/img/foto-15-1600.webp",
+      "srcset": "assets/img/foto-15-640.webp 640w, assets/img/foto-15-1600.webp 1600w"
+    }
+  ]
+}
