@@ -30,3 +30,38 @@ const observer = new IntersectionObserver((entries) => entries.forEach((entry) =
 document.querySelectorAll('[data-reveal]').forEach((item) => observer.observe(item));
 window.addEventListener('scroll', () => document.querySelector('.site-header').classList.toggle('is-scrolled', scrollY > 5), { passive:true });
 document.querySelector('#year').textContent = new Date().getFullYear();
+const navToggle = document.querySelector('[data-nav-toggle]');
+const navLinks = document.querySelector('.nav__links');
+if (navToggle && navLinks) {
+  const closeNav = () => { navLinks.classList.remove('is-open'); navToggle.setAttribute('aria-expanded', 'false'); };
+  navToggle.addEventListener('click', () => { const isOpen = navLinks.classList.toggle('is-open'); navToggle.setAttribute('aria-expanded', String(isOpen)); });
+  navLinks.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeNav(); });
+}
+
+// Carrusel de testimonios: desplazamiento táctil nativo, botones y teclado.
+const testimonialCarousel = document.querySelector('[data-testimonial-carousel]');
+if (testimonialCarousel) {
+  const viewport = testimonialCarousel.querySelector('[data-testimonial-viewport]');
+  const cards = [...testimonialCarousel.querySelectorAll('.testimonial')];
+  const dots = [...testimonialCarousel.querySelectorAll('[data-testimonial-dot]')];
+  const counter = testimonialCarousel.querySelector('[data-testimonial-count]');
+  let testimonialIndex = 0;
+  const setTestimonial = (index, behavior = 'smooth') => {
+    testimonialIndex = (index + cards.length) % cards.length;
+    viewport.scrollTo({ left: cards[testimonialIndex].offsetLeft, behavior });
+    dots.forEach((dot, dotIndex) => dot.setAttribute('aria-selected', String(dotIndex === testimonialIndex)));
+    counter.textContent = `${String(testimonialIndex + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+  };
+  testimonialCarousel.querySelector('[data-testimonial-prev]').addEventListener('click', () => setTestimonial(testimonialIndex - 1));
+  testimonialCarousel.querySelector('[data-testimonial-next]').addEventListener('click', () => setTestimonial(testimonialIndex + 1));
+  dots.forEach((dot, index) => dot.addEventListener('click', () => setTestimonial(index)));
+  viewport.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); setTestimonial(testimonialIndex - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); setTestimonial(testimonialIndex + 1); }
+  });
+  viewport.addEventListener('scroll', () => {
+    const nearest = cards.reduce((best, card, index) => Math.abs(card.offsetLeft - viewport.scrollLeft) < Math.abs(cards[best].offsetLeft - viewport.scrollLeft) ? index : best, 0);
+    if (nearest !== testimonialIndex) { testimonialIndex = nearest; dots.forEach((dot, index) => dot.setAttribute('aria-selected', String(index === nearest))); counter.textContent = `${String(nearest + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`; }
+  }, { passive:true });
+}
